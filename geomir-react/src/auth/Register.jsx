@@ -5,10 +5,7 @@ import './login-register.css'
 
 export default function Register({ setCanvi }) {
 
-    let [nom, setNom] = useState("");
-    let [cognom, setCognom] = useState("");
-    let [correu, setCorreu] = useState("");
-    let [contra, setContra] = useState("");
+    let [formulari, setFormulari] = useState({});
 
     return (
       <>
