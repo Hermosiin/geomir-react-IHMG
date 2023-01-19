@@ -6,38 +6,38 @@ export default function Register({ setCanvi }) {
     return (
       <>
         <form class="auth-inner">
-          <h3>Sign Up</h3>
+          <h3>Registrar-se</h3>
           <div className="mb-3">
-            <label>First name</label>
+            <label>Nom</label>
             <input
               type="text"
               className="form-control"
-              placeholder="First name"
+              placeholder="Nom"
             />
           </div>
           <div className="mb-3">
-            <label>Last name</label>
-            <input type="text" className="form-control" placeholder="Last name" />
+            <label>Cognom</label>
+            <input type="text" className="form-control" placeholder="Cognom" />
           </div>
           <div className="mb-3">
-            <label>Email address</label>
+            <label>Correu Electrònic</label>
             <input
               type="email"
               className="form-control"
-              placeholder="Enter email"
+              placeholder="Correu Electrònic"
             />
           </div>
           <div className="mb-3">
-            <label>Password</label>
+            <label>Contrasenya</label>
             <input
               type="password"
               className="form-control"
-              placeholder="Enter password"
+              placeholder="Contrasenya"
             />
           </div>
           <div className="d-grid">
             <button type="submit" className="btn btn-primary">
-              Sign Up
+              Registrar-se
             </button>
           </div>
           <p className="forgot-password text-right">
