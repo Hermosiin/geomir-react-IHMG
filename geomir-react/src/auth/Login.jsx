@@ -1,8 +1,13 @@
+import { useState } from 'react';
 import React from 'react'
 import './login-register.css'
 
 
 export default function Login({ setCanvi }) {
+
+    let [correu, setCorreu] = useState("");
+    let [contra, setContra] = useState("");
+
     return (
       <>
         <form class="auth-inner">
@@ -10,6 +15,7 @@ export default function Login({ setCanvi }) {
           <div className="mb-3">
             <label>Correu Electrònic</label>
             <input
+              name="correu"
               type="email"
               className="form-control"
               placeholder="Correu Electrònic"
@@ -18,6 +24,7 @@ export default function Login({ setCanvi }) {
           <div className="mb-3">
             <label>Contrasenya</label>
             <input
+              name="contra"
               type="password"
               className="form-control"
               placeholder="Contrasenya"
