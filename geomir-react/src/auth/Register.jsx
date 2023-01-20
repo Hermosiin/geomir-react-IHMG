@@ -7,26 +7,42 @@ export default function Register({ setCanvi }) {
 
     let [formulari, setFormulari] = useState({});
 
+    const handleChange = (e) => {
+      e.preventDefault();
+  
+      setFormulari({
+        ...formulari,
+        [e.target.name]: e.target.value
+      });
+    };
+
+    const handleRegister = (e) => {
+      e.preventDefault();
+  
+      let { nom, correu, contra } = formulari;
+      alert(
+        "He enviat les Dades:  " +
+          nom +
+          "/" +
+          correu +
+          "/" +
+          contra 
+      );
+    };
+
     return (
       <>
         <form class="auth-inner">
           <h3>Registrar-se</h3>
           <div className="mb-3">
-            <label>Nom</label>
+            <label>Nom i Cognom</label>
             <input
               name="nom"
               type="text"
               className="form-control"
-              placeholder="Nom"
+              placeholder="Nom i Cognom"
+              onChange={handleChange}
             />
-          </div>
-          <div className="mb-3">
-            <label>Cognom</label>
-            <input 
-              name="cognom"
-              type="text" 
-              className="form-control" 
-              placeholder="Cognom" />
           </div>
           <div className="mb-3">
             <label>Correu Electrònic</label>
@@ -35,6 +51,7 @@ export default function Register({ setCanvi }) {
               type="email"
               className="form-control"
               placeholder="Correu Electrònic"
+              onChange={handleChange}
             />
           </div>
           <div className="mb-3">
@@ -44,10 +61,15 @@ export default function Register({ setCanvi }) {
               type="password"
               className="form-control"
               placeholder="Contrasenya"
+              onChange={handleChange}
             />
           </div>
           <div className="d-grid">
-            <button type="submit" className="btn btn-primary">
+            <button type="submit" className="btn btn-primary"
+              onClick={(e) => {
+                handleRegister(e);
+              }}
+            >
               Registrar-se
             </button>
           </div>

@@ -8,6 +8,12 @@ export default function Login({ setCanvi }) {
     let [correu, setCorreu] = useState("");
     let [contra, setContra] = useState("");
 
+    const sendLogin = (e) => {
+      e.preventDefault();
+  
+      alert("He enviat les Dades:  " + correu + "/" + contra);
+    };
+
     return (
       <>
         <form class="auth-inner">
@@ -19,6 +25,9 @@ export default function Login({ setCanvi }) {
               type="email"
               className="form-control"
               placeholder="Correu Electrònic"
+              onChange={(e) => {
+                setCorreu(e.target.value);
+              }}
             />
           </div>
           <div className="mb-3">
@@ -28,22 +37,17 @@ export default function Login({ setCanvi }) {
               type="password"
               className="form-control"
               placeholder="Contrasenya"
+              onChange={(e) => {
+                setContra(e.target.value);
+              }}
             />
           </div>
-          <div className="mb-3">
-            <div className="custom-control custom-checkbox">
-              <input
-                type="checkbox"
-                className="custom-control-input"
-                id="customCheck1"
-              />
-              <label className="custom-control-label" htmlFor="customCheck1">
-                &nbsp;Recorda'm
-              </label>
-            </div>
-          </div>
           <div className="d-grid">
-            <button type="submit" className="btn btn-primary">
+            <button type="submit" className="btn btn-primary" 
+              onClick={(e) => {
+                sendLogin(e);
+              }}
+            >
               Iniciar Sessió
             </button>
           </div>
