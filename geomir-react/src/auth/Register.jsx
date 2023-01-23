@@ -23,6 +23,7 @@ export default function Register({ setCanvi }) {
       e.preventDefault();
   
       let { nom, correu, contra1, contra2 } = formulari;
+
       alert(
         "He enviat les Dades:  " +
           nom +
@@ -33,6 +34,7 @@ export default function Register({ setCanvi }) {
           "/" +
           contra2 
       );
+
       if (contra2 !== contra1) {
         alert("Els passwords han de coincidir");
         return false;
@@ -45,7 +47,7 @@ export default function Register({ setCanvi }) {
         },
         method: "POST",
         // Si els noms i les variables coincideix, podem simplificar
-        body: JSON.stringify({ nom, correu, contra1 })
+        body: JSON.stringify({ name : nom, email : correu, password : contra1 })
       })
         .then((data) => data.json())
         .then((resposta) => {

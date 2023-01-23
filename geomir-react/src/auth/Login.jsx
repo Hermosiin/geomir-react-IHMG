@@ -20,7 +20,7 @@ export default function Login({ setCanvi }) {
           "Content-Type": "application/json"
         },
         method: "POST",
-        body: JSON.stringify({ correu: correu, contra: contra })
+        body: JSON.stringify({ email : correu, password : contra })
       })
         .then((data) => data.json())
         .then((resposta) => {
