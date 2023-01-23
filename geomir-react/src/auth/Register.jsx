@@ -6,6 +6,9 @@ import './login-register.css'
 export default function Register({ setCanvi }) {
 
     let [formulari, setFormulari] = useState({});
+    let [error, setError] = useState("");
+
+
 
     const handleChange = (e) => {
       e.preventDefault();
@@ -19,17 +22,51 @@ export default function Register({ setCanvi }) {
     const handleRegister = (e) => {
       e.preventDefault();
   
-      let { nom, correu, contra } = formulari;
+      let { nom, correu, contra1, contra2 } = formulari;
       alert(
         "He enviat les Dades:  " +
           nom +
           "/" +
           correu +
           "/" +
-          contra 
+          contra1 +  
+          "/" +
+          contra2 
       );
+      if (contra2 !== contra1) {
+        alert("Els passwords han de coincidir");
+        return false;
+      }
+  
+      fetch("https://backend.insjoaquimmir.cat/api/register", {
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json"
+        },
+        method: "POST",
+        // Si els noms i les variables coincideix, podem simplificar
+        body: JSON.stringify({ nom, correu, contra1 })
+      })
+        .then((data) => data.json())
+        .then((resposta) => {
+          console.log(resposta);
+          if (resposta.success === true) {
+            alert(resposta.authToken);
+          }
+          else{ 
+            console.log(resposta)
+            setError(resposta.message);
+          }
+        })
+        .catch((data) => {
+          console.log(data);
+          alert("Catchch");
+        });
+  
+      alert("He enviat les Dades:  " + correu + "/" + contra1);
+  
     };
-
+    
     return (
       <>
         <form class="auth-inner">
@@ -57,13 +94,24 @@ export default function Register({ setCanvi }) {
           <div className="mb-3">
             <label>Contrasenya</label>
             <input
-              name="contra"
+              name="contra1"
               type="password"
               className="form-control"
               placeholder="Contrasenya"
               onChange={handleChange}
             />
           </div>
+          <div className="mb-3">
+            <label>Confirma la Contrasenya</label>
+            <input
+              name="contra2"
+              type="password"
+              className="form-control"
+              placeholder="Confirmar Contrasenya"
+              onChange={handleChange}
+            />
+          </div>
+          { error ? (<div className="mensaje-error"> {error}</div>) : (<></>)} 
           <div className="d-grid">
             <button type="submit" className="btn btn-primary"
               onClick={(e) => {

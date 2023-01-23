@@ -63,3 +63,12 @@ body, html, .App, #root, .auth-wrapper {
   color: #167bff;
   cursor: pointer;
 }
+
+.mensaje-error{
+  margin-bottom: 2vh;
+  border: 1px solid red;
+  border-radius: 20px;
+  text-align: center;
+  background-color: rgb(255, 167, 167);
+  padding: 3px;
+}

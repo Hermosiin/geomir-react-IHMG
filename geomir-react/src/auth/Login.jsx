@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { Fragment, useState } from 'react';
 import React from 'react'
 import './login-register.css'
 
@@ -7,13 +7,40 @@ export default function Login({ setCanvi }) {
 
     let [correu, setCorreu] = useState("");
     let [contra, setContra] = useState("");
+    let [error, setError] = useState("");
 
     const sendLogin = (e) => {
       e.preventDefault();
   
+      console.log("Comprovant credencials....");
+      // Enviam dades a l'aPI i recollim resultat
+      fetch("https://backend.insjoaquimmir.cat/api/login", {
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json"
+        },
+        method: "POST",
+        body: JSON.stringify({ correu: correu, contra: contra })
+      })
+        .then((data) => data.json())
+        .then((resposta) => {
+          console.log(resposta);
+          if (resposta.success === true) {
+            alert(resposta.authToken);
+          }
+          else{ 
+            console.log(resposta)
+            setError(resposta.message);
+          }
+        })
+        .catch((data) => {
+          console.log(data);
+          alert("Catchch");
+        });
+  
       alert("He enviat les Dades:  " + correu + "/" + contra);
     };
-
+  
     return (
       <>
         <form class="auth-inner">
@@ -29,6 +56,7 @@ export default function Login({ setCanvi }) {
                 setCorreu(e.target.value);
               }}
             />
+
           </div>
           <div className="mb-3">
             <label>Contrasenya</label>
@@ -42,6 +70,7 @@ export default function Login({ setCanvi }) {
               }}
             />
           </div>
+          { error ? (<div className="mensaje-error"> {error}</div>) : (<></>)} 
           <div className="d-grid">
             <button type="submit" className="btn btn-primary" 
               onClick={(e) => {
@@ -50,7 +79,9 @@ export default function Login({ setCanvi }) {
             >
               Iniciar Sessió
             </button>
-          </div>
+
+            
+            </div>
           <p className="forgot-password text-right">
             Encara no tenns compta? <a class="link-cambiar"onClick={() => { setCanvi(false); }}> Registrar Compta </a>
           </p>
