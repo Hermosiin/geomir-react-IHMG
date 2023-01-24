@@ -1,6 +1,7 @@
-import { Fragment, useState } from 'react';
+import { useContext, useState } from 'react';
 import React from 'react'
 import './login-register.css'
+import { UserContext } from '../userContext';
 
 
 export default function Login({ setCanvi }) {
@@ -8,6 +9,7 @@ export default function Login({ setCanvi }) {
     let [correu, setCorreu] = useState("");
     let [contra, setContra] = useState("");
     let [error, setError] = useState("");
+    let {authToken, setAuthToken} = useContext(UserContext);
 
     const sendLogin = (e) => {
       e.preventDefault();
@@ -27,6 +29,7 @@ export default function Login({ setCanvi }) {
           console.log(resposta);
           if (resposta.success === true) {
             alert(resposta.authToken);
+            setAuthToken(resposta.authToken);
           }
           else{ 
             console.log(resposta)
@@ -43,7 +46,7 @@ export default function Login({ setCanvi }) {
   
     return (
       <>
-        <form class="auth-inner">
+        <form className="auth-inner">
           <h3>Iniciar Sessió</h3>
           <div className="mb-3">
             <label>Correu Electrònic</label>
@@ -83,7 +86,7 @@ export default function Login({ setCanvi }) {
             
             </div>
           <p className="forgot-password text-right">
-            Encara no tenns compta? <a class="link-cambiar"onClick={() => { setCanvi(false); }}> Registrar Compta </a>
+            Encara no tenns compta? <a className="link-cambiar"onClick={() => { setCanvi(false); }}> Registrar Compta </a>
           </p>
         </form>
       </>

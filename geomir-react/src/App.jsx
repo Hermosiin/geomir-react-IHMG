@@ -7,15 +7,20 @@ import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import { Routes, Route } from "react-router-dom";
 import LoginRegister from './auth/LoginRegister';
 import About from "./About";
-import Header from "./Header";
+import Header from "./layout/Header";
+import Footer from "./layout/Footer";
+import NotFound from "./NotFound";
 
-let [authToken, setAuthToken] = useState("");
+import Post from "./posts/Post";
+
+
+
 
 
 export default function App() {
   // difere`cnai entre emprar i no emprar state
 
-  let [authToken, setAuthToken] = useState("abcd");
+  let [authToken, setAuthToken] = useState("");
 
   return (
     <>
@@ -26,10 +31,14 @@ export default function App() {
         {authToken ? (
           <>
             <Header />
+
             <Routes>
-              <Route path="/" element={<About />} />
+              <Route path="*" element={<NotFound />} />
+              <Route path="/" element={<Post />} />
               <Route path="/about" element={<About />} />
             </Routes>
+
+            <Footer />
           </>
         ) : (
           <LoginRegister />
