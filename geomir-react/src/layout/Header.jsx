@@ -10,7 +10,7 @@ import { useEffect } from 'react';
 export default function Header() {
   let {authToken, setAuthToken}=useContext(UserContext)
   let [nom, setNom]=useState("");
-  let [role, setRole]=useState("");
+  let [role, setRole]=useState([]); 
 
   useEffect(() => {
 
@@ -74,7 +74,9 @@ export default function Header() {
         <button
             onClick={(e) => {
               logout(e);
-            }}> {nom} Log Out {role}</button>
+            }}> {nom} Log Out { role.map (  (v)=> ( 
+              <span key={v}> {v} </span>
+    ) ) }</button>
       </div>
       <hr />
     </>
