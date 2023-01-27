@@ -38,7 +38,6 @@ export default function Header() {
       });  
   }, [])
 
-    
     const logout = (e) => { 
     e.preventDefault();
     console.log("Comprovant credencials....");
