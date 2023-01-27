@@ -3,13 +3,43 @@ import { Link } from 'react-router-dom';
 import { UserContext } from '../userContext';
 import { useState, useContext } from 'react';
 import './header-footer.css';
+import { useEffect } from 'react';
 
 
 
 export default function Header() {
   let {authToken, setAuthToken}=useContext(UserContext)
+  let [nom, setNom]=useState("");
+  let [role, setRole]=useState("");
 
-  const logout = (e) => {
+  useEffect(() => {
+
+    fetch("https://backend.insjoaquimmir.cat/api/user", {
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+        'Authorization': 'Bearer '  + authToken,
+
+      },
+      method: "GET",
+    })
+      .then((data) => data.json())
+      .then((resposta) => {
+        console.log(resposta);
+        if (resposta.success === true) {
+          console.log(resposta.authToken);
+          setNom(resposta.user.name);    
+          setRole(resposta.roles)     
+        }
+      })
+      .catch((data) => {
+        console.log(data);
+        console.log("Catchch");
+      });  
+  }, [])
+
+    
+    const logout = (e) => { 
     e.preventDefault();
     console.log("Comprovant credencials....");
     // Enviam dades a l'aPI i recollim resultat
@@ -44,7 +74,7 @@ export default function Header() {
         <button
             onClick={(e) => {
               logout(e);
-            }}>Log Out</button>
+            }}> {nom} Log Out {role}</button>
       </div>
       <hr />
     </>
