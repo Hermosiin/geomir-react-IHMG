@@ -1,14 +1,15 @@
 import { useState } from 'react';
 import React from 'react'
 import './login-register.css'
+import { UserContext } from '../userContext';
+import { useContext } from 'react';
 
 
 export default function Register({ setCanvi }) {
 
     let [formulari, setFormulari] = useState({});
     let [error, setError] = useState("");
-
-
+    let {authToken, setAuthToken} = useContext(UserContext);
 
     const handleChange = (e) => {
       e.preventDefault();
@@ -19,9 +20,10 @@ export default function Register({ setCanvi }) {
       });
     };
 
-    const handleRegister = (e) => {
+    const handleRegister = async (e) => {
       e.preventDefault();
-  
+      console.log("Comprovant credencials....");
+
       let { nom, correu, contra1, contra2 } = formulari;
 
       alert(
@@ -39,39 +41,42 @@ export default function Register({ setCanvi }) {
         alert("Els passwords han de coincidir");
         return false;
       }
-  
-      fetch("https://backend.insjoaquimmir.cat/api/register", {
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json"
-        },
-        method: "POST",
-        // Si els noms i les variables coincideix, podem simplificar
-        body: JSON.stringify({ name : nom, email : correu, password : contra1 })
-      })
-        .then((data) => data.json())
-        .then((resposta) => {
-          console.log(resposta);
-          if (resposta.success === true) {
-            alert(resposta.authToken);
-          }
-          else{ 
-            console.log(resposta)
-            setError(resposta.message);
-          }
-        })
-        .catch((data) => {
-          console.log(data);
-          alert("Catchch");
+    
+      // Enviam dades a l'aPI i recollim resultat
+      try {
+        const data = await fetch("https://backend.insjoaquimmir.cat/api/register", {
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json"
+          },
+          method: "POST",
+          body: JSON.stringify({ name : nom, email : correu, password : contra1 })
         });
   
-      alert("He enviat les Dades:  " + correu + "/" + contra1);
   
+        const resposta = await data.json();
+        if (resposta.success === true){
+          alert(resposta.authToken);
+          setAuthToken(resposta.authToken);
+
+        }
+          
+        else 
+          alert("La resposta no ha triomfat");
+          console.log(resposta)
+          setError(resposta.message);
+  
+  
+        alert("He enviat les Dades:  " + correu + "/" + contra1);
+      } catch {
+        console.log("Error");
+        alert("catch");
+      }
     };
     
     return (
       <>
-        <form class="auth-inner">
+        <form className="auth-inner">
           <h3>Registrar-se</h3>
           <div className="mb-3">
             <label>Nom i Cognom</label>
@@ -124,7 +129,7 @@ export default function Register({ setCanvi }) {
             </button>
           </div>
           <p className="forgot-password text-right">
-            Ja tens compta? <a class="link-cambiar" onClick={() => { setCanvi(true);}}> Inicia Sessió </a>
+            Ja tens compta? <a className="link-cambiar" onClick={() => { setCanvi(true);}}> Inicia Sessió </a>
           </p>
         </form>
         

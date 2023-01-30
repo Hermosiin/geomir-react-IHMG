@@ -12,58 +12,78 @@ export default function Header() {
   let [nom, setNom]=useState("");
   let [role, setRole]=useState([]); 
 
-  useEffect(() => {
+  const getUser = async () => {
 
-    fetch("https://backend.insjoaquimmir.cat/api/user", {
-      headers: {
-        Accept: "application/json",
+    console.log("Comprovant credencials....");
+  
+    // Enviam dades a l'aPI i recollim resultat
+    try {
+      const data = await fetch("https://backend.insjoaquimmir.cat/api/user", {
+        headers: {
+          Accept: "application/json",
         "Content-Type": "application/json",
         'Authorization': 'Bearer '  + authToken,
 
-      },
-      method: "GET",
-    })
-      .then((data) => data.json())
-      .then((resposta) => {
-        console.log(resposta);
-        if (resposta.success === true) {
-          console.log(resposta.authToken);
-          setNom(resposta.user.name);    
-          setRole(resposta.roles)     
-        }
-      })
-      .catch((data) => {
-        console.log(data);
-        console.log("Catchch");
-      });  
-  }, [])
+        },
+        method: "GET",
+      });
 
-    const logout = (e) => { 
+      const resposta = await data.json();
+      if (resposta.success === true){
+        console.log(resposta.authToken);
+        setNom(resposta.user.name);    
+        setRole(resposta.roles)    
+
+      }
+        
+      else 
+        alert("La resposta no ha triomfat");
+        console.log(resposta)
+
+    } catch {
+      console.log("Error");
+      alert("catch");
+    }
+  };
+
+  const logout = async (e) => {
     e.preventDefault();
     console.log("Comprovant credencials....");
+  
     // Enviam dades a l'aPI i recollim resultat
-    fetch("https://backend.insjoaquimmir.cat/api/logout", {
-      headers: {
-        Accept: "application/json",
+    try {
+      const data = await fetch("https://backend.insjoaquimmir.cat/api/logout", {
+        headers: {
+          Accept: "application/json",
         "Content-Type": "application/json",
         'Authorization': 'Bearer '  + authToken,
 
-      },
-      method: "POST",
-    })
-      .then((data) => data.json())
-      .then((resposta) => {
-       console.log(resposta);
-       if (resposta.success === true) {
-         console.log(resposta.authToken);
-         setAuthToken('')
-       }
-     })
-      .catch((data) => {
-        console.log(data);
-        console.log("Catchch");
-     });  
-   };
+        },
+        method: "POST",
+      });
+
+      const resposta = await data.json();
+      if (resposta.success === true){
+        console.log(resposta.authToken);
+         setAuthToken('')    
+
+      }
+        
+      else 
+        alert("La resposta no ha triomfat");
+        console.log(resposta)
+
+    } catch {
+      console.log("Error");
+      alert("catch");
+    }
+  };
+
+  useEffect(() => {
+    getUser();
+  }, [])
+
+
   return (
     <>
       <div>
@@ -71,11 +91,12 @@ export default function Header() {
         <Link to="/posts">Posts </Link>
         <Link to="/about">About </Link>
         <button
-            onClick={(e) => {
-              logout(e);
-            }}> {nom} Log Out { role.map (  (v)=> ( 
-              <span key={v}> {v} </span>
-    ) ) }</button>
+          onClick={(e) => {
+            logout(e);
+          }}> Log Out </button>
+          <p> User: {nom} Role: { role.map (  (v)=> ( 
+            <span key={v}> {v} </span> 
+          ) ) } </p>
       </div>
       <hr />
     </>

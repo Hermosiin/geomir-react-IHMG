@@ -11,38 +11,45 @@ export default function Login({ setCanvi }) {
     let [error, setError] = useState("");
     let {authToken, setAuthToken} = useContext(UserContext);
 
-    const sendLogin = (e) => {
-      e.preventDefault();
   
+
+    const sendLogin = async (e) => {
+      e.preventDefault();
       console.log("Comprovant credencials....");
+    
       // Enviam dades a l'aPI i recollim resultat
-      fetch("https://backend.insjoaquimmir.cat/api/login", {
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json"
-        },
-        method: "POST",
-        body: JSON.stringify({ email : correu, password : contra })
-      })
-        .then((data) => data.json())
-        .then((resposta) => {
-          console.log(resposta);
-          if (resposta.success === true) {
-            alert(resposta.authToken);
-            setAuthToken(resposta.authToken);
-          }
-          else{ 
-            console.log(resposta)
-            setError(resposta.message);
-          }
-        })
-        .catch((data) => {
-          console.log(data);
-          alert("Catchch");
+      try {
+        const data = await fetch("https://backend.insjoaquimmir.cat/api/login", {
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json"
+          },
+          method: "POST",
+          body: JSON.stringify({ email : correu, password : contra })
         });
   
-      alert("He enviat les Dades:  " + correu + "/" + contra);
+  
+        const resposta = await data.json();
+        if (resposta.success === true){
+          alert(resposta.authToken);
+          setAuthToken(resposta.authToken);
+
+        }
+          
+        else 
+          alert("La resposta no ha triomfat");
+          console.log(resposta)
+          setError(resposta.message);
+  
+  
+        alert("He enviat les Dades:  " + correu + "/" + contra);
+      } catch {
+        console.log("Error");
+        alert("catch");
+      }
     };
+  
+
   
     return (
       <>
