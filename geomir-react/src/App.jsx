@@ -12,6 +12,7 @@ import Footer from "./layout/Footer";
 import NotFound from "./NotFound";
 
 import Post from "./posts/Post";
+import Place from "./places/Place";
 
 
 
@@ -34,6 +35,8 @@ export default function App() {
 
             <Routes>
               <Route path="*" element={<NotFound />} />
+              <Route path="/posts" element={<Post />} />
+              <Route path="/places" element={<Place />} />
               <Route path="/" element={<Post />} />
               <Route path="/about" element={<About />} />
             </Routes>
