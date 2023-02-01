@@ -72,3 +72,9 @@ body, html, .App, #root, .auth-wrapper {
   background-color: rgb(255, 167, 167);
   padding: 3px;
 }
+
+.footer{
+  height: 200px;
+
+}
+
