@@ -86,17 +86,21 @@ export default function Header() {
 
   return (
     <>
-      <div>
-        <Link to="/places">Places </Link>
-        <Link to="/posts">Posts </Link>
-        <Link to="/about">About </Link>
-        <button
+      <div className='cabecera'>
+        <div className='botones'>
+          <Link to="/places" >Places </Link>
+          <Link to="/posts">Posts </Link>
+          <Link to="/about">About </Link>
+        </div>
+        <p className='roles-name'> USER: {nom} ROLE: { role.map (  (v)=> ( 
+          <span key={v}> {v} </span> 
+        ) ) } 
+        </p>
+        <button className='boton-logout'
           onClick={(e) => {
             logout(e);
-          }}> Log Out </button>
-          <p> User: {nom} Role: { role.map (  (v)=> ( 
-            <span key={v}> {v} </span> 
-          ) ) } </p>
+          }}> Log Out 
+        </button>
       </div>
       <hr />
     </>

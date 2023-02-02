@@ -46,22 +46,27 @@ const PostsList = () => {
 
   return (
     <div className='container'>
-      <table class="table">
-          <tbody>
-              <tr>
-                  <th><h1>ID</h1></th>
-                  <th><h1>Body</h1></th>
-                  <th><h1>Author</h1></th>
-                  <th><h1>Latitude </h1></th>
-                  <th><h1>Longitude</h1></th>
-                  <th><h1>Visibilty</h1></th>
-                  <th><h1>Likes</h1></th>
+      <table className="table">
+          <thead>
+            <tr>
+              <th><h1>ID</h1></th>
+              <th><h1>Body</h1></th>
+              <th><h1>Author</h1></th>
+              <th><h1>Latitude </h1></th>
+              <th><h1>Longitude</h1></th>
+              <th><h1>Visibilty</h1></th>
+              <th><h1>Likes</h1></th>
+              <th colSpan={3}><h1>Actiones</h1></th>
 
-              </tr>
-                {posts.map((post) => (
-                  (<tr key={post.id}><PostList post={post}/></tr>)
-                ))}
+
+            </tr>
+          </thead>
+          <tbody>
+            {posts.map((post) => (
+              (<tr key={post.id}><PostList post={post}/></tr>)
+            ))}
           </tbody>
+
       </table>
     </div>
 
