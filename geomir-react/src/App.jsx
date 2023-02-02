@@ -14,6 +14,11 @@ import NotFound from "./NotFound";
 import Post from "./posts/Post";
 import Place from "./places/Place";
 
+import PlaceAdd from "./places/PlaceAdd";
+import PlaceEdit from "./places/PlaceEdit";
+import PlacesGrid from "./places/PlacesGrid";
+import PlacesList from "./places/PlacesList";
+import PlacesMenu from "./places/PlacesMenu";
 
 
 
@@ -36,9 +41,16 @@ export default function App() {
             <Routes>
               <Route path="*" element={<NotFound />} />
               <Route path="/posts" element={<Post />} />
-              <Route path="/places" element={<Place />} />
+              
               <Route path="/" element={<Post />} />
               <Route path="/about" element={<About />} />
+
+              <Route path="/places/grid" element={<> <PlacesMenu/><PlacesGrid /> </>} />
+              <Route path="/places" element={<> <PlacesMenu/><PlacesList /> </>} />
+              <Route path="/places/add" element={<> <PlacesMenu/><PlaceAdd /> </>} />
+              <Route path="/places/:id" element={<> <PlacesMenu/><Place /> </>} />
+              <Route path="/places/edit/:id" element={<> <PlacesMenu/><PlaceEdit /> </>} />
+
             </Routes>
 
             <Footer />
