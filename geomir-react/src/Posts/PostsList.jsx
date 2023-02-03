@@ -7,7 +7,7 @@ import PostList from './PostList';
 
 const PostsList = () => {
   let [ posts, setPosts] = useState([]);
-  let {authToken, setAuthToken}=useContext(UserContext)
+  let { usuari, setUsuari,authToken,setAuthToken } = useContext(UserContext)
 
 
   const getPosts = async () => {
@@ -56,15 +56,16 @@ const PostsList = () => {
               <th><h1>Longitude</h1></th>
               <th><h1>Visibilty</h1></th>
               <th><h1>Likes</h1></th>
-              <th colSpan={3}><h1>Actiones</h1></th>
+              <th colSpan={30}><h1>Actiones</h1></th>
 
 
             </tr>
           </thead>
           <tbody>
-            {posts.map((post) => (
-              (<tr key={post.id}><PostList post={post}/></tr>)
-            ))}
+          {posts.map((post) => (
+            (post.visibility.name == 'public' || usuari == post.author.email) &&  
+            (<tr  key={post.id}><PostList post={post} /></tr>)
+          ))}
           </tbody>
 
       </table>

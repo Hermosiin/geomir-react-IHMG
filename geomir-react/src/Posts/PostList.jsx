@@ -6,7 +6,7 @@ import '../App.css'
 
 
 export default function PostList ({post})  {
-  let { authToken,setAuthToken } = useContext(UserContext)
+  let { usuari, setUsuari,authToken,setAuthToken } = useContext(UserContext)
 
   return (
     <>
@@ -19,8 +19,12 @@ export default function PostList ({post})  {
         <td>{post.likes_count} <i class="bi bi-heart-fill"></i></td>   
 
         <td><Link to={"/posts/" +post.id}> <i className="bi bi-eye-fill"></i></Link></td>
-        <td><Link to={"/posts/edit/" +post.id}> <i className="bi bi-pencil-fill"></i></Link></td>
-        <td><Link to={"/posts/delete/" +post.id}> <i className="bi bi-trash3-fill"></i></Link></td>
+
+        {(usuari == post.author.email ) &&  
+        <td><Link to={"/posts/edit/" +post.id}><i className="bi bi-pencil-fill"></i></Link></td>}
+
+        {(usuari == post.author.email ) &&
+        <td><Link to={"/posts/delete/" +post.id}> <i className="bi bi-trash3-fill"></i></Link></td>}
     </>
   )
 }

@@ -4,7 +4,7 @@ const PostAdd = () => {
   return (
     <div className='posts'>
 
-    <h1>Aqui se añaden posts</h1>
+    <h1>Aqui se añaden posts holaaaaaaaaaaaaa</h1>
    
   </div>
   )

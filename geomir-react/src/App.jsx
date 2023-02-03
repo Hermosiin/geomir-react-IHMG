@@ -28,13 +28,14 @@ export default function App() {
   // difere`cnai entre emprar i no emprar state
 
   let [authToken, setAuthToken] = useState("");
+  let [usuari, setUsuari] = useState("");
+
 
 
   return (
     <>
       <UserContext.Provider
-        value={{ authToken, setAuthToken }}
-        // { authToken, setAuthToken } equival a  { authToken: authToken, setAuthToken:setAuthToken}
+      value= { { usuari, setUsuari,authToken,setAuthToken }}        // { authToken, setAuthToken } equival a  { authToken: authToken, setAuthToken:setAuthToken}
       >
         {authToken ? (
           <>
