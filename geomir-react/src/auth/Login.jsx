@@ -9,7 +9,7 @@ export default function Login({ setCanvi }) {
     let [correu, setCorreu] = useState("");
     let [contra, setContra] = useState("");
     let [error, setError] = useState("");
-    let {authToken, setAuthToken} = useContext(UserContext);
+    let { usuari, setUsuari,authToken,setAuthToken } = useContext(UserContext)
 
   
 
@@ -33,6 +33,8 @@ export default function Login({ setCanvi }) {
         if (resposta.success === true){
           alert(resposta.authToken);
           setAuthToken(resposta.authToken);
+          setUsuari(correu)
+          console.log(resposta.authToken,usuari);
 
         }
           

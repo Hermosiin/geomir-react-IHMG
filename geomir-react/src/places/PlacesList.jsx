@@ -7,7 +7,8 @@ import { PlaceList } from './PlaceList';
 
 const PlacesList = () => {
   let [ places, setPlaces] = useState([]);
-  let {authToken, setAuthToken}=useContext(UserContext)
+  let { usuari, setUsuari,authToken,setAuthToken } = useContext(UserContext)
+
 
 
   const getPlaces = async (e) => {
@@ -59,12 +60,15 @@ return (
           <th><h1>LATITUDE</h1></th>
           <th><h1>LONGITUDE</h1></th>
           <th><h1>REVIEWS</h1></th>
-          <th><h1>Visibility</h1></th>
-          <th><h1>Favorites</h1></th>
+          <th><h1>VISIBILITY</h1></th>
+          <th><h1>FAVORITES</h1></th>
+          <th colSpan={3}><h1>ACTIONS</h1></th>
         </tr>
       </thead>
       <tbody>
-        {places.map((place) => ( 
+
+        {places.map((place) => (
+          (place.visibility.name == 'public' || usuari == place.author.email) &&  
           (<tr  key={place.id}><PlaceList place={place} /></tr>)
         ))}
       </tbody>
