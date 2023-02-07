@@ -10,25 +10,37 @@
 .div-cartas{
     border: 0.3vh solid black; 
     margin:30px;  
-    height: 70vh; 
+    height: 90vh; 
     width: 30%; 
     background-color:#BCBCBC;
     text-align: center;
 
 }
 
+.div-show{
+    border: 0.3vh solid black; 
+    margin:30px;  
+    height: 90vh; 
+    width: 30%; 
+    background-color:#BCBCBC;
+    text-align: center;
+    margin: 0 auto;
+    margin-top: 5vh;
+}
 
-.nameAuthor{
+
+.nombre{
     font-size: 35px;
 
 }
-.postimg img{
+.img-post img{
     border: 2px solid black;
     width: 80%;
     margin: 2vh;
+    height: 62vh;
 }
 
-.bodyPost{
+.body-post{
     border: 2px solid black ;
     margin-right: 3vh;
     margin-left: 3vh;
@@ -38,7 +50,7 @@
     height: auto;
 }
 
-.likespost{
+.likes-post{
     margin-top: 1vh;
     color: red;
     bottom: 0;

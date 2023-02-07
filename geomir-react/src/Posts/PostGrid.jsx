@@ -10,17 +10,21 @@ const PostGrid =({post}) => {
   return (
     <>  
         <div className='div-cartas'>
-            <div className='nameAuthor'>
+            <div className='nombre'>
                 <p>@{post.author.name}</p>
             </div>
-            <div className='postimg'>
+            <div className='img-post'>
                 <img src={"https://backend.insjoaquimmir.cat/storage/" + post.file.filepath} alt={post.name} height="400"width="300"/>
             </div>
             
-            <div className='bodyPost'>
-                {post.body}    
+            <div className='body-post'>
+                {post.body}  
+                <br></br>  
+                Latitud: {post.latitude}
+                <br />
+                 Longitud: {post.longitude}
             </div>
-            <div className='likespost'>
+            <div className='likes-post'>
                 <p><i class="bi bi-heart-fill"> {post.likes_count}</i></p>
                 <Link to={"/posts/" +post.id}> <i className="bi bi-eye-fill"></i></Link>
 
