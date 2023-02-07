@@ -67,7 +67,7 @@ export default function PostAdd () {
         console.log("Error");
         alert("catch");
       }
-      formAddPost.reset(); 
+      FormulariPostAdd.reset(); 
       
     }
     useEffect(() => {
@@ -92,7 +92,7 @@ export default function PostAdd () {
   return (
     <div>
         <div className="container-add">
-          <form id="formAddPost"className="addPost">
+          <form id="FormulariPostAdd"c lassName="addPost">
             <div className="title"><h3>Add New Post</h3></div>
 
             <div>
