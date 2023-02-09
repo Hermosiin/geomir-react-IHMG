@@ -6,6 +6,7 @@ import { UserContext } from '../userContext';
 export default function Place () {
   const { id } = useParams();
   let {usuari,setUsuari,authToken,setAuthToken } = useContext(UserContext)
+  let [refresh,setRefresh] = useState(false)
   let [place, setPlaces] = useState({
     author:{name:""},
     name:"",
@@ -45,6 +46,36 @@ export default function Place () {
     }
   }
 
+  const deletePlace = async (e,id) =>{
+    e.preventDefault();
+    try{
+      const data = await fetch("https://backend.insjoaquimmir.cat/api/places/" + id, {
+        headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+        'Authorization': 'Bearer ' + authToken
+        },
+        method: "DELETE",
+    })
+
+      const resposta = await data.json();
+      console.log(resposta);
+      if (resposta.success === true) {
+        setRefresh(!refresh);
+        alert("Place eliminat correctament");
+        console.log("Place eliminat correctament");
+      }
+      else{
+        alert("El place no se ha podido eliminar");
+        console.log(resposta.message);
+      }
+
+    }catch {
+      console.log(data);
+      console.log("catch");
+    }
+  }
+
   useEffect(() => { getPlace();}, []);
   return (
 
@@ -64,7 +95,7 @@ export default function Place () {
         <Link to={"/places/edit/" +place.id}><i className="bi bi-pencil-fill"></i></Link>}
 
         {(usuari == place.author.email ) &&
-        <Link to={"/places/delete/" +place.id}> <i className="bi bi-trash3-fill"></i></Link>}
+          <button onClick={(e) => { deletePlace(e,place.id);}}><i className="bi bi-trash3-fill"></i></button>}
   
       </div>
 

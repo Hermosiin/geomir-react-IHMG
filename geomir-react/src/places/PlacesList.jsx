@@ -5,11 +5,11 @@ import './PlacesList.css';
 import { PlaceList } from './PlaceList';
 
 
+
 const PlacesList = () => {
   let [ places, setPlaces] = useState([]);
   let { usuari, setUsuari,authToken,setAuthToken } = useContext(UserContext)
-
-
+  let [refresh,setRefresh] = useState(false)
 
   const getPlaces = async (e) => {
       try {
@@ -30,7 +30,6 @@ const PlacesList = () => {
           setPlaces(resposta.data);
           setAuthToken(authToken);  
           console.log(places); 
-
          
         }else{
           console.log("La resposta no ha triomfat");
@@ -42,9 +41,40 @@ const PlacesList = () => {
         console.log("catch");
       }
     };
+
+    const deletePlace = async (e,id) =>{
+      e.preventDefault();
+      try{
+        const data = await fetch("https://backend.insjoaquimmir.cat/api/places/" + id, {
+          headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+          'Authorization': 'Bearer ' + authToken
+          },
+          method: "DELETE",
+      })
+  
+        const resposta = await data.json();
+        console.log(resposta);
+        if (resposta.success === true) {
+          setRefresh(!refresh);
+          alert("Place eliminat correctament");
+          console.log("Place eliminat correctament");
+        }
+        else{
+          alert("El place no se ha podido eliminar");
+          console.log(resposta.message);
+        }
+  
+      }catch {
+        console.log(data);
+        console.log("catch");
+      }
+    }
+
     useEffect(()=>{
       getPlaces();
-  }, [])
+  }, [refresh])
 
 return (
   <>
@@ -69,7 +99,7 @@ return (
 
         {places.map((place) => (
           (place.visibility.name == 'public' || usuari == place.author.email) &&  
-          (<tr  key={place.id}><PlaceList place={place} /></tr>)
+          (<tr  key={place.id}><PlaceList place={place} deletePlace={deletePlace} /></tr>)
         ))}
       </tbody>
     </table>

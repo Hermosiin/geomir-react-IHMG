@@ -3,7 +3,7 @@ import './PlacesGrid.css';
 import { UserContext } from '../userContext'
 import { Link } from 'react-router-dom'
 
-export const PlaceGrid = ({place}) => {
+export const PlaceGrid = ({place, deletePlace}) => {
   let { usuari, setUsuari,authToken,setAuthToken } = useContext(UserContext)
 
   return (
@@ -25,11 +25,10 @@ export const PlaceGrid = ({place}) => {
                 <Link to={"/places/edit/" +place.id}><i className="bi bi-pencil-fill"></i></Link>}
 
                 {(usuari == place.author.email ) &&
-                <Link to={"/places/delete/" +place.id}> <i className="bi bi-trash3-fill"></i></Link>}
+                <button onClick={(e) => { deletePlace(e,place.id);}}><i className="bi bi-trash3-fill"></i></button>}
    
             </div>
         </div>
-        
 
     </>
   )
