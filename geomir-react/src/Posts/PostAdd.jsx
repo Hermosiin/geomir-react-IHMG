@@ -1,13 +1,16 @@
 import React, { useContext, useState, useEffect } from 'react'
 import { UserContext } from "../userContext";
 import './PostAdd.css'
+import { useNavigate } from "react-router-dom";
 export default function PostAdd () {
+  
 
 
   let [formulari, setFormulari] = useState({});
   let {authToken,setAuthToken } = useContext(UserContext);
   let [missatge, setMissatge] = useState("");
   let [missatgeOK, setMissatgeOK] = useState("");
+  let navigate = useNavigate();
 
   const handleChange = (e) => {
     e.preventDefault();
@@ -56,6 +59,7 @@ export default function PostAdd () {
         if (resposta.success === true){
           console.log(resposta);
           setMissatgeOK("Post creat!!");
+          navigate("/posts/")
         } 
 
         else{

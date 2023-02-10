@@ -1,6 +1,8 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom';
 import { UserContext } from '../userContext';
+import { useNavigate } from "react-router-dom";
+
 
 
 export default function Post () {
@@ -16,6 +18,8 @@ export default function Post () {
     coments_count:"",
     file:{filepath:""}
   });
+  let navigate = useNavigate();
+
   
   const getPost = async () => {
     try{
@@ -61,6 +65,7 @@ export default function Post () {
       if (resposta.success === true) {
         setRefresh(!refresh);
         alert("Post eliminat correctament");
+        navigate("/posts/")
         console.log("Post eliminat correctament");
       }
       else{

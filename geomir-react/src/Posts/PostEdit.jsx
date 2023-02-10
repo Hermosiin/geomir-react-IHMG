@@ -1,12 +1,16 @@
 import React, { useContext, useState, useEffect } from 'react'
 import { UserContext } from "../userContext";
 import { useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+
 
 export default function PostEdit () {
     const { id } = useParams();
     let [formulari, setFormulari] = useState({});
     let { authToken,setAuthToken } = useContext(UserContext);
     let [error, setError] = useState("");
+    let navigate = useNavigate();
+
 
     const handleChange = (e) => {
       e.preventDefault();
@@ -92,6 +96,7 @@ export default function PostEdit () {
         if (resposta.success === true){
           console.log(resposta);
           alert("Post editado correctamente");
+          navigate("/posts/" + id)
         } 
 
         else{
