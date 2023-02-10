@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom';
 import { UserContext } from '../userContext';
-
+import { useNavigate } from "react-router-dom";
 
 export default function Place () {
   const { id } = useParams();
@@ -17,6 +17,7 @@ export default function Place () {
     reviews_count:"",
     file:{filepath:""}
   });
+  let navigate = useNavigate();
   
   const getPlace = async () => {
     try{
@@ -64,6 +65,7 @@ export default function Place () {
         setRefresh(!refresh);
         alert("Place eliminat correctament");
         console.log("Place eliminat correctament");
+        navigate("/places/")
       }
       else{
         alert("El place no se ha podido eliminar");
@@ -76,7 +78,7 @@ export default function Place () {
     }
   }
 
-  useEffect(() => { getPlace();}, []);
+  useEffect(() => { getPlace();}, [refresh]);
   return (
 
     <div>

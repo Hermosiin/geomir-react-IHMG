@@ -1,11 +1,13 @@
 import React, { useContext, useState, useEffect } from 'react'
 import { UserContext } from "../userContext";
 import './PlaceAdd.css'
+import { useNavigate } from "react-router-dom";
 
 export default function PlaceAdd () {
   let [formulari, setFormulari] = useState({});
   let { authToken,setAuthToken } = useContext(UserContext);
   let [error, setError] = useState("");
+  let navigate = useNavigate();
 
   const handleChange = (e) => {
     e.preventDefault();
@@ -52,7 +54,8 @@ export default function PlaceAdd () {
         if (resposta.success === true){
           console.log(resposta);
           alert("Place creado correctamente");
-          setFormulari({})
+          setFormulari({});
+          navigate("/places/")
         } 
 
         else{

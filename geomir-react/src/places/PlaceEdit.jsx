@@ -2,12 +2,14 @@ import React, { useContext, useState, useEffect } from 'react'
 import { UserContext } from "../userContext";
 import '../App.css'
 import { useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 export default function PlaceEdit () {
     const { id } = useParams();
     let [formulari, setFormulari] = useState({});
     let { authToken,setAuthToken } = useContext(UserContext);
     let [error, setError] = useState("");
+    let navigate = useNavigate();
 
     const handleChange = (e) => {
       e.preventDefault();
@@ -95,6 +97,7 @@ export default function PlaceEdit () {
         if (resposta.success === true){
           console.log(resposta);
           alert("Place editado correctamente");
+          navigate("/places/")
         } 
 
         else{
