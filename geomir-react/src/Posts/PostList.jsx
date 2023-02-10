@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'
 import '../App.css'
 
 
-export default function PostList ({post})  {
+export default function PostList ({post, deletePost})  {
   let { usuari, setUsuari,authToken,setAuthToken } = useContext(UserContext)
 
   return (
@@ -24,7 +24,7 @@ export default function PostList ({post})  {
         <td><Link to={"/posts/edit/" +post.id}><i className="bi bi-pencil-fill"></i></Link></td>}
 
         {(usuari == post.author.email ) &&
-        <td><Link to={"/posts/delete/" +post.id}> <i className="bi bi-trash3-fill"></i></Link></td>}
-    </>
-  )
-}
+              <td><button onClick={(e) => { deletePost(e,post.id); }}><i className="bi bi-trash3-fill"></i></button></td>}
+            </>
+          )
+        }

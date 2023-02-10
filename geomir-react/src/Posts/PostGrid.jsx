@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'
 import './PostGrid.css'
 
 
-const PostGrid =({post}) => {
+const PostGrid =({post, deletePost}) => {
     let { usuari, setUsuari,authToken,setAuthToken } = useContext(UserContext)
   return (
     <>  
@@ -32,7 +32,7 @@ const PostGrid =({post}) => {
                 <Link to={"/posts/edit/" +post.id}><i className="bi bi-pencil-fill"></i></Link>}
 
                 {(usuari == post.author.email ) &&
-                <Link to={"/posts/delete/" +post.id}> <i className="bi bi-trash3-fill"></i></Link>}
+                <button onClick={(e) => { deletePost(e,post.id);}}><i className="bi bi-trash3-fill"></i></button>}
             </div>
         </div>
     </>

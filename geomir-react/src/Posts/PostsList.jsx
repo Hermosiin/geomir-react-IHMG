@@ -8,6 +8,7 @@ import PostList from './PostList';
 const PostsList = () => {
   let [ posts, setPosts] = useState([]);
   let { usuari, setUsuari,authToken,setAuthToken } = useContext(UserContext)
+  let [refresh,setRefresh] = useState(false)
 
 
   const getPosts = async () => {
@@ -40,9 +41,39 @@ const PostsList = () => {
         console.log("catch");
       }
     };
+
+    const deletePost = async (e,id) =>{
+      e.preventDefault();
+      try{
+        const data = await fetch("https://backend.insjoaquimmir.cat/api/posts/" + id, {
+          headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+          'Authorization': 'Bearer ' + authToken
+          },
+          method: "DELETE",
+      })
+  
+        const resposta = await data.json();
+        console.log(resposta);
+        if (resposta.success === true) {
+          setRefresh(!refresh);
+          alert("Post eliminat correctament");
+          console.log("Post eliminat correctament");
+        }
+        else{
+          alert("El post no se ha podido eliminar");
+          console.log(resposta.message);
+        }
+  
+      }catch {
+        console.log(data);
+        console.log("catch");
+      }
+    }
     useEffect(()=>{
       getPosts();
-  }, [])
+  }, [refresh])
 
   return (
     <div className='container'>
@@ -64,7 +95,7 @@ const PostsList = () => {
           <tbody>
           {posts.map((post) => (
             (post.visibility.name == 'public' || usuari == post.author.email) &&  
-            (<tr  key={post.id}><PostList post={post} /></tr>)
+            (<tr  key={post.id}><PostList post={post} deletePost={deletePost}/></tr>)
           ))}
           </tbody>
 
