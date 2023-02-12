@@ -97,7 +97,7 @@ export default function PlaceEdit () {
         if (resposta.success === true){
           console.log(resposta);
           alert("Place editado correctamente");
-          navigate("/places/")
+          navigate("/places/" + id)
         } 
 
         else{

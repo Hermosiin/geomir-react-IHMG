@@ -92,7 +92,7 @@ return (
           <th><h1>REVIEWS</h1></th>
           <th><h1>VISIBILITY</h1></th>
           <th><h1>FAVORITES</h1></th>
-          <th colSpan={3}><h1>ACTIONS</h1></th>
+          <th colSpan={4}><h1>ACTIONS</h1></th>
         </tr>
       </thead>
       <tbody>

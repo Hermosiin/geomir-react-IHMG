@@ -28,6 +28,7 @@ import PlaceEdit from "./places/PlaceEdit";
 import PlacesGrid from "./places/PlacesGrid";
 import PlacesList from "./places/PlacesList";
 import PlacesMenu from "./places/PlacesMenu";
+import ReviewsList from "./places/reviews/ReviewsList";
 
 
 
@@ -56,6 +57,7 @@ export default function App() {
               <Route path="/places/add" element={<> <PlacesMenu/><PlaceAdd /> </>} />
               <Route path="/places/:id" element={<> <PlacesMenu/><Place /> </>} />
               <Route path="/places/edit/:id" element={<> <PlacesMenu/><PlaceEdit /> </>} />
+              <Route path="/places/:id/reviews" element={<> <PlacesMenu/><ReviewsList /> </>} />
 
               <Route path="/posts" element={<> <PostMenu/><PostsList /> </>} /> 
               <Route path="/posts/grid" element={<> <PostMenu/><PostsGrid /> </>} /> 

@@ -19,6 +19,7 @@ export const PlaceList = ({place, deletePlace}) => {
       <td>{place.favorites_count} <i className="bi bi-star-fill"></i></td>
 
       <td><Link to={"/places/" +place.id}> <i className="bi bi-eye-fill"></i></Link></td>
+      <td><Link to={"/places/" +place.id+"/reviews"}> <i className="bi bi-chat"></i></Link></td>
 
       {(usuari == place.author.email ) &&  
       <td><Link to={"/places/edit/" +place.id}><i className="bi bi-pencil-fill"></i></Link></td>}

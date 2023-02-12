@@ -31,10 +31,11 @@ export default function Login({ setCanvi }) {
   
         const resposta = await data.json();
         if (resposta.success === true){
-          alert(resposta.authToken);
+          console.log(resposta.authToken);
           setAuthToken(resposta.authToken);
           setUsuari(correu)
           console.log(resposta.authToken,usuari);
+          alert("Has iniciado sesion correctamente");
 
         }
           
@@ -44,7 +45,7 @@ export default function Login({ setCanvi }) {
           setError(resposta.message);
   
   
-        alert("He enviat les Dades:  " + correu + "/" + contra);
+
       } catch {
         console.log("Error");
         alert("catch");

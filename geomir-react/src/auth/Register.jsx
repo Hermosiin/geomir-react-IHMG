@@ -56,7 +56,8 @@ export default function Register({ setCanvi }) {
   
         const resposta = await data.json();
         if (resposta.success === true){
-          alert(resposta.authToken);
+          alert("Te has registrado correctamente")
+          console.log(resposta.authToken);
           setAuthToken(resposta.authToken);
 
         }
@@ -67,7 +68,7 @@ export default function Register({ setCanvi }) {
           setError(resposta.message);
   
   
-        alert("He enviat les Dades:  " + correu + "/" + contra1);
+
       } catch {
         console.log("Error");
         alert("catch");

@@ -93,8 +93,11 @@ export default function Place () {
 
       <div>
 
+
         {(usuari == place.author.email ) &&  
         <Link to={"/places/edit/" +place.id}><i className="bi bi-pencil-fill"></i></Link>}
+
+        <Link to={"/places/" +place.id+"/reviews"}><i className="bi bi-chat"></i></Link>
 
         {(usuari == place.author.email ) &&
           <button onClick={(e) => { deletePlace(e,place.id);}}><i className="bi bi-trash3-fill"></i></button>}

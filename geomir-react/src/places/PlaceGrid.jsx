@@ -19,6 +19,7 @@ export const PlaceGrid = ({place, deletePlace}) => {
             <p>Este place tiene {place.reviews_count} reseñas.</p>
             <div>
                 <Link to={"/places/" +place.id}> <i className="bi bi-eye-fill"></i></Link>
+                <Link to={"/places/" +place.id+"/reviews"}> <i className="bi bi-chat"></i></Link>
 
                 {(usuari == place.author.email ) &&  
                 <Link to={"/places/edit/" +place.id}><i className="bi bi-pencil-fill"></i></Link>}
