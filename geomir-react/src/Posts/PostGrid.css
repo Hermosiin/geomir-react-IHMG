@@ -1,0 +1,58 @@
+@import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css");
+.postgrid{
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    flex-direction: row;
+    width: 100%;
+
+}
+.div-cartas{
+    border: 0.3vh solid black; 
+    margin:30px;  
+    height: 90vh; 
+    width: 30%; 
+    background-color:#BCBCBC;
+    text-align: center;
+
+}
+
+.div-show{
+    border: 0.3vh solid black; 
+    margin:30px;  
+    height: 90vh; 
+    width: 30%; 
+    background-color:#BCBCBC;
+    text-align: center;
+    margin: 0 auto;
+    margin-top: 5vh;
+}
+
+
+.nombre{
+    font-size: 35px;
+
+}
+.img-post img{
+    border: 2px solid black;
+    width: 80%;
+    margin: 2vh;
+    height: 62vh;
+}
+
+.body-post{
+    border: 2px solid black ;
+    margin-right: 3vh;
+    margin-left: 3vh;
+    border-radius: 10px;
+    color: white;
+    background-color: black;
+    height: auto;
+}
+
+.likes-post{
+    margin-top: 1vh;
+    color: red;
+    bottom: 0;
+    left: 0;
+}
