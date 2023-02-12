@@ -5,15 +5,15 @@ import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { Link } from 'react-router-dom'
 
-export default function ReviewsList () {
+export default function CommentsList () {
     const { id } = useParams();
-    let [reviews, setReviews] = useState([]);
+    let [comments, setComments] = useState([]);
     let { authToken,setAuthToken } = useContext(UserContext);
 
-    const getReviews = async() =>{
+    const getComments = async() =>{
       
       try{
-        const data = await fetch("https://backend.insjoaquimmir.cat/api/places/" + id + "/reviews", {
+        const data = await fetch("https://backend.insjoaquimmir.cat/api/posts/" + id + "/comments", {
           headers: {
             'Accept': 'application/json',
             'Authorization': 'Bearer ' + authToken
@@ -24,11 +24,11 @@ export default function ReviewsList () {
         const resposta = await data.json();
         if (resposta.success === true){
           console.log(resposta.data);
-          setReviews(resposta.data);
+          setComments(resposta.data);
         } 
 
         else{
-          console.log(reviews)
+          console.log(comments)
           alert("La resposta no ha triomfat");
         } 
           
@@ -40,19 +40,19 @@ export default function ReviewsList () {
     }
     
     useEffect(() => {
-      getReviews();
+      getComments();
       
     }, [])
   return (
     <>
     <div>
         <h1>REVIEWS PLACE {id}</h1>
-        {reviews.map((review) => (
-            (<p key={review.id}>- {review.user.name}: {review.review}</p>)
+        {comments.map((comment) => (
+            (<p key={comment.id}>- {comment.user.name}: {comment.comment}</p>)
         ))}
     </div>
     <div>
-        <Link to={"/places/" +id+"/reviews/add"}> <i className="bi bi-plus-circle"></i></Link>
+        <Link to={"/posts/" +id+"/comments/add"}> <i className="bi bi-plus-circle"></i></Link>
 
     </div>
     </>

@@ -19,6 +19,7 @@ export default function PostList ({post, deletePost})  {
         <td>{post.likes_count} <i class="bi bi-heart-fill"></i></td>   
 
         <td><Link to={"/posts/" +post.id}> <i className="bi bi-eye-fill"></i></Link></td>
+        <td><Link to={"/posts/" +post.id+"/comments"}> <i className="bi bi-chat"></i></Link></td>
 
         {(usuari == post.author.email ) &&  
         <td><Link to={"/posts/edit/" +post.id}><i className="bi bi-pencil-fill"></i></Link></td>}

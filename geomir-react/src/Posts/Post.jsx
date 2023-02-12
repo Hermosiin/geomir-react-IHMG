@@ -100,6 +100,7 @@ export default function Post () {
       <div className='likes-post'>
           <p><i class="bi bi-heart-fill"> {post.likes_count}</i></p>
           <Link to={"/posts/" +post.id}> <i className="bi bi-eye-fill"></i></Link>
+          <Link to={"/posts/" +post.id+"/comments"}><i className="bi bi-chat"></i></Link>
 
           {(usuari == post.author.email ) &&  
           <Link to={"/posts/edit/" +post.id}><i className="bi bi-pencil-fill"></i></Link>}

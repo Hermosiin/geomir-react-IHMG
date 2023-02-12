@@ -16,12 +16,14 @@ import { useParams } from 'react-router-dom';
 
 import Place from "./places/Place";
 
-import Post from "./Posts/Post";
-import PostAdd from "./Posts/PostAdd";
-import PostEdit from "./Posts/PostEdit";
-import PostsGrid from "./Posts/PostsGrid";
-import PostsList from "./Posts/PostsList";
-import PostMenu from './Posts/PostMenu';
+import Post from "./posts/Post";
+import PostAdd from "./posts/PostAdd";
+import PostEdit from "./posts/PostEdit";
+import PostsGrid from "./posts/PostsGrid";
+import PostsList from "./posts/PostsList";
+import PostMenu from './posts/PostMenu';
+import CommentsList from "./posts/comments/CommentsList";
+import CommentAdd from "./posts/comments/CommentAdd";
 
 import PlaceAdd from "./places/PlaceAdd";
 import PlaceEdit from "./places/PlaceEdit";
@@ -29,6 +31,7 @@ import PlacesGrid from "./places/PlacesGrid";
 import PlacesList from "./places/PlacesList";
 import PlacesMenu from "./places/PlacesMenu";
 import ReviewsList from "./places/reviews/ReviewsList";
+import ReviewAdd from "./places/reviews/ReviewAdd";
 
 
 
@@ -50,7 +53,7 @@ export default function App() {
 
             <Routes>
               <Route path="*" element={<NotFound />} />
-              <Route path="/" element={<Post />} />
+              <Route path="/" element={<PostsList />} />
               <Route path="/about" element={<About />} />
               <Route path="/places/grid" element={<> <PlacesMenu/><PlacesGrid /> </>} />
               <Route path="/places" element={<> <PlacesMenu/><PlacesList /> </>} />
@@ -58,12 +61,16 @@ export default function App() {
               <Route path="/places/:id" element={<> <PlacesMenu/><Place /> </>} />
               <Route path="/places/edit/:id" element={<> <PlacesMenu/><PlaceEdit /> </>} />
               <Route path="/places/:id/reviews" element={<> <PlacesMenu/><ReviewsList /> </>} />
+              <Route path="/places/:id/reviews/add" element={<> <PlacesMenu/><ReviewAdd /> </>} />
 
               <Route path="/posts" element={<> <PostMenu/><PostsList /> </>} /> 
               <Route path="/posts/grid" element={<> <PostMenu/><PostsGrid /> </>} /> 
               <Route path="/posts/add" element={<> <PostMenu/><PostAdd /> </>} /> 
               <Route path="/posts/:id" element={<> <PostMenu/><Post /> </>} /> 
-              <Route path="/posts/edit/:id" element={<> <PostMenu/><PostEdit /> </>} /> 
+              <Route path="/posts/edit/:id" element={<> <PostMenu/><PostEdit /> </>} />
+              <Route path="/posts/:id/comments" element={<> <PostMenu/><CommentsList /> </>} />
+              <Route path="/posts/:id/comments/add" element={<> <PostMenu/><CommentAdd /> </>} /> 
+
             </Routes>
 
 
