@@ -49,8 +49,6 @@ export default function App() {
 
             <Routes>
               <Route path="*" element={<NotFound />} />
-              <Route path="/posts" element={<Post />} />
-              <Route path="/places" element={<Place />} />
               <Route path="/" element={<Post />} />
               <Route path="/about" element={<About />} />
               <Route path="/places/grid" element={<> <PlacesMenu/><PlacesGrid /> </>} />
