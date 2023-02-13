@@ -18,6 +18,7 @@ export default function Place () {
     file:{filepath:""}
   });
   let navigate = useNavigate();
+  let [ favorito, setFavorito ] = useState(false);
   
   const getPlace = async () => {
     try{
@@ -78,7 +79,83 @@ export default function Place () {
     }
   }
 
+  const comprobarFavorito = async (e) => {
+    try {
+      const data = await fetch("https://backend.insjoaquimmir.cat/api/places/"+id+"/favorites", {
+        headers: {
+          "Accept": "application/json",
+          "Content-Type": "application/json",
+          "Authorization": 'Bearer '  + authToken,
+        },
+        method: "POST",
+      })
+      const resposta = await data.json();
+      console.log(resposta);
+      if (resposta.success == true){
+        setFavorito(false);
+        unfavorite();
+      }else{
+        setFavorito(true);
+      }            
+    } catch {
+      console.log("Error");
+    }
+  };
+
+  const favorite = async (e) => {
+    try {
+      const data = await fetch("https://backend.insjoaquimmir.cat/api/places/"+id+"/favorites", {
+        headers: {
+          "Accept": "application/json",
+          "Content-Type": "application/json",
+          "Authorization": 'Bearer '  + authToken,
+        },
+        method: "POST",
+      })
+      const resposta = await data.json();
+      console.log(resposta);
+      if (resposta.success == true){
+        setFavorito(true);
+        alert("Favorito añadido correctamente")
+      }else{
+        alert("Ya tenias en favoritos este sitio");
+        setFavorito(false);
+      }            
+      setRefresh(!refresh);
+    } catch {
+      console.log("Error");
+    }
+  };
+
+  const unfavorite = async (e) => {
+    try {
+      const data = await fetch("https://backend.insjoaquimmir.cat/api/places/"+id+"/favorites", {
+        headers: {
+          "Accept": "application/json",
+          "Content-Type": "application/json",
+          "Authorization": 'Bearer '  + authToken,
+        },
+        method: "DELETE",
+      })
+      const resposta = await data.json();
+      console.log(resposta);
+      if (resposta.success == true){
+        setFavorito(false);
+        console.log("Favorito quitado correctamente")
+        //lo tenia puesto como alert pero cada vez que entraba a un place que no tenia favorite me salia el alert de quitado correctamente
+      }else{
+        alert("No tienes en favoritos este sitio");
+      }            
+      setRefresh(!refresh);
+    } catch {
+      console.log("Error");
+    }
+  };
+
   useEffect(() => { getPlace();}, [refresh]);
+  useEffect(()=>{
+    comprobarFavorito()
+  }, []);
   return (
 
     <div>
@@ -98,6 +175,12 @@ export default function Place () {
         <Link to={"/places/edit/" +place.id}><i className="bi bi-pencil-fill"></i></Link>}
 
         <Link to={"/places/" +place.id+"/reviews"}><i className="bi bi-chat"></i></Link>
+
+  
+        {favorito == false &&
+          <button onClick={(e) => {favorite(e, place.id);}} ><i className="bi bi-star"></i></button>}
+        {favorito == true &&
+          <button onClick={(e) => {unfavorite(e, place.id);}} ><i className="bi bi-star-fill"></i></button>}
 
         {(usuari == place.author.email ) &&
           <button onClick={(e) => { deletePlace(e,place.id);}}><i className="bi bi-trash3-fill"></i></button>}

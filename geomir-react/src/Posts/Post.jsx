@@ -19,6 +19,7 @@ export default function Post () {
     file:{filepath:""}
   });
   let navigate = useNavigate();
+  let [ megusta, setMegusta ] = useState(false);
 
   
   const getPost = async () => {
@@ -79,7 +80,83 @@ export default function Post () {
     }
   }
 
+  const comprobarMegusta = async (e) => {
+    try {
+      const data = await fetch("https://backend.insjoaquimmir.cat/api/posts/"+id+"/likes", {
+        headers: {
+          "Accept": "application/json",
+          "Content-Type": "application/json",
+          "Authorization": 'Bearer '  + authToken,
+        },
+        method: "POST",
+      })
+      const resposta = await data.json();
+      console.log(resposta);
+      if (resposta.success == true){
+        setMegusta(false);
+        unlike();
+      }else{
+        setMegusta(true);
+      }            
+    } catch {
+      console.log("Error");
+    }
+  };
+
+  const like = async (e) => {
+    try {
+      const data = await fetch("https://backend.insjoaquimmir.cat/api/posts/"+id+"/likes", {
+        headers: {
+          "Accept": "application/json",
+          "Content-Type": "application/json",
+          "Authorization": 'Bearer '  + authToken,
+        },
+        method: "POST",
+      })
+      const resposta = await data.json();
+      console.log(resposta);
+      if (resposta.success == true){
+        setMegusta(true);
+        alert("Like añadido correctamente")
+      }else{
+        alert("Ya tenias en like este post");
+        setMegusta(false);
+      }            
+      setRefresh(!refresh);
+    } catch {
+      console.log("Error");
+    }
+  };
+
+  const unlike = async (e) => {
+    try {
+      const data = await fetch("https://backend.insjoaquimmir.cat/api/posts/"+id+"/likes", {
+        headers: {
+          "Accept": "application/json",
+          "Content-Type": "application/json",
+          "Authorization": 'Bearer '  + authToken,
+        },
+        method: "DELETE",
+      })
+      const resposta = await data.json();
+      console.log(resposta);
+      if (resposta.success == true){
+        setMegusta(false);
+        console.log("Like quitado correctamente")
+        //lo tenia puesto como alert pero cada vez que entraba a un post que no tenia like me salia el alert de quitado correctamente
+      }else{
+        alert("No tienes en likes este postt");
+      }            
+      setRefresh(!refresh);
+    } catch {
+      console.log("Error");
+    }
+  };
+
   useEffect(() => { getPost();}, [refresh]);
+  useEffect(()=>{
+    comprobarMegusta()
+  }, []);
   return (
 
     <div className='div-show'>
@@ -99,12 +176,16 @@ export default function Post () {
       </div>
       <div className='likes-post'>
           <p><i class="bi bi-heart-fill"> {post.likes_count}</i></p>
-          <Link to={"/posts/" +post.id}> <i className="bi bi-eye-fill"></i></Link>
           <Link to={"/posts/" +post.id+"/comments"}><i className="bi bi-chat"></i></Link>
 
           {(usuari == post.author.email ) &&  
           <Link to={"/posts/edit/" +post.id}><i className="bi bi-pencil-fill"></i></Link>}
 
+          {megusta == false &&
+          <button onClick={(e) => {like(e, post.id);}} ><i className="bi bi-star"></i></button>}
+
+          {megusta == true &&
+          <button onClick={(e) => {unlike(e, post.id);}} ><i className="bi bi-star-fill"></i></button>}
           {(usuari == post.author.email ) &&
           <button onClick={(e) => { deletePost(e,post.id);}}><i className="bi bi-trash3-fill"></i></button>}
       </div>
