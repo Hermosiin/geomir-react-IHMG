@@ -23,7 +23,6 @@ import PostsGrid from "./posts/PostsGrid";
 import PostsList from "./posts/PostsList";
 import PostMenu from './posts/PostMenu';
 import CommentsList from "./posts/comments/CommentsList";
-import CommentAdd from "./posts/comments/CommentAdd";
 
 import PlaceAdd from "./places/PlaceAdd";
 import PlaceEdit from "./places/PlaceEdit";
@@ -69,7 +68,6 @@ export default function App() {
               <Route path="/posts/:id" element={<> <PostMenu/><Post /> </>} /> 
               <Route path="/posts/edit/:id" element={<> <PostMenu/><PostEdit /> </>} />
               <Route path="/posts/:id/comments" element={<> <PostMenu/><CommentsList /> </>} />
-              <Route path="/posts/:id/comments/add" element={<> <PostMenu/><CommentAdd /> </>} /> 
 
             </Routes>
 

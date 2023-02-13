@@ -38,7 +38,7 @@ export const ReviewAdd = ({refresh, setRefresh}) => {
       const resposta = await data.json();
       if (resposta.success === true){
           console.log(resposta);
-          setSuccess("Review Creada Correctamente");
+          setSuccess("Review creado Correctamente");
           setRefresh(!refresh);
           setFormulari({});
       }else{
