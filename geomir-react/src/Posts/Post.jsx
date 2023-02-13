@@ -182,10 +182,10 @@ export default function Post () {
           <Link to={"/posts/edit/" +post.id}><i className="bi bi-pencil-fill"></i></Link>}
 
           {megusta == false &&
-          <button onClick={(e) => {like(e, post.id);}} ><i className="bi bi-star"></i></button>}
+          <button onClick={(e) => {like(e, post.id);}} ><i className="bi bi-heart"></i></button>}
 
           {megusta == true &&
-          <button onClick={(e) => {unlike(e, post.id);}} ><i className="bi bi-star-fill"></i></button>}
+          <button onClick={(e) => {unlike(e, post.id);}} ><i className="bi bi-heart-fill"></i></button>}
           {(usuari == post.author.email ) &&
           <button onClick={(e) => { deletePost(e,post.id);}}><i className="bi bi-trash3-fill"></i></button>}
       </div>
